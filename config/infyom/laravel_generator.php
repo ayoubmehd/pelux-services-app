@@ -154,11 +154,11 @@ return [
 
         'route' => 'admin',  // using admin will create route('admin.?.index') type routes
 
-        'path' => 'admin',
+        'path' => '',
 
         'view' => 'admin',  // using backend will create return view('backend.?.index') type the backend views directory
 
-        'public' => 'admin',
+        'public' => '',
     ],
 
     /*
