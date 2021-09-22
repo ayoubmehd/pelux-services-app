@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Adress
  * @package App\Models
- * @version September 22, 2021, 2:15 pm UTC
+ * @version September 22, 2021, 3:07 pm UTC
  *
  * @property \App\Models\City $city
  * @property string $ligne1
@@ -22,7 +22,7 @@ class Adress extends Model
     use HasFactory;
 
     public $table = 'adresses';
-    
+
 
 
 
@@ -51,7 +51,7 @@ class Adress extends Model
      */
     public static $rules = [
         'ligne1' => 'required|string|max:255|string|max:255',
-        'ligne2' => 'required|string|max:255|string|max:255',
+        'ligne2' => 'nullable|string|max:255|string|max:255',
         'created_at' => 'nullable|nullable',
         'updated_at' => 'nullable|nullable',
         'city_id' => 'required'

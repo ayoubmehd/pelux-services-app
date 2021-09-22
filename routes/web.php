@@ -23,6 +23,8 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 
     Route::resource('cities', App\Http\Controllers\Admin\CityController::class);
+
+    Route::resource('adresses', App\Http\Controllers\Admin\AdressController::class);
 });
 
 Auth::routes();

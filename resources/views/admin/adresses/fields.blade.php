@@ -13,5 +13,5 @@
 <!-- City Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('city_id', 'City Id:') !!}
-    {!! Form::select('city_id', ], null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('city_id', [], null, ['class' => 'form-control custom-select']) !!}
 </div>

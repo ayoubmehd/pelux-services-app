@@ -22,3 +22,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('admin.adresses.index') }}"
+       class="nav-link {{ Request::is('admin/adresses*') ? 'active' : '' }}">
+        <p>Adresses</p>
+    </a>
+</li>
+
+
