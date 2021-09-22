@@ -30,3 +30,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('services', App\Http\Controllers\ServiceController::class, ["as" => 'admin']);
+});
