@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class User
- * @package App\Models
- * @version September 22, 2021, 11:29 am UTC
+ * @package App\Models\Admin
+ * @version September 22, 2021, 11:34 am UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $orders
  * @property \Illuminate\Database\Eloquent\Collection $services
@@ -22,14 +22,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class User extends Model
 {
-    use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'users';
     
-
-    protected $dates = ['deleted_at'];
 
 
 
@@ -78,7 +75,7 @@ class User extends Model
      **/
     public function orders()
     {
-        return $this->hasMany(\App\Models\Order::class, 'user_id');
+        return $this->hasMany(\App\Models\Admin\Order::class, 'user_id');
     }
 
     /**
@@ -86,6 +83,6 @@ class User extends Model
      **/
     public function services()
     {
-        return $this->hasMany(\App\Models\Service::class, 'provider_id');
+        return $this->hasMany(\App\Models\Admin\Service::class, 'provider_id');
     }
 }

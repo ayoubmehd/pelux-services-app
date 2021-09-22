@@ -128,7 +128,7 @@ return [
 
     'options' => [
 
-        'softDelete' => true,
+        'softDelete' => false,
 
         'save_schema_file' => true,
 
@@ -152,13 +152,13 @@ return [
 
     'prefixes' => [
 
-        'route' => '',  // using admin will create route('admin.?.index') type routes
+        'route' => 'admin',  // using admin will create route('admin.?.index') type routes
 
-        'path' => '',
+        'path' => 'admin',
 
-        'view' => '',  // using backend will create return view('backend.?.index') type the backend views directory
+        'view' => 'admin',  // using backend will create return view('backend.?.index') type the backend views directory
 
-        'public' => '',
+        'public' => 'admin',
     ],
 
     /*

@@ -97,7 +97,7 @@
     },
     {
         "name": "role",
-        "dbType": "enum:user,provider,admin",
+        "dbType": "enum:'user','provider','admin'",
         "htmlType": "select",
         "validations": "nullable|nullable",
         "searchable": true,
