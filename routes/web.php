@@ -25,12 +25,12 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('cities', App\Http\Controllers\Admin\CityController::class);
 
     Route::resource('adresses', App\Http\Controllers\Admin\AdressController::class);
+
+    Route::resource('services', App\Http\Controllers\Admin\ServiceController::class);
+
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('services', App\Http\Controllers\ServiceController::class, ["as" => 'admin']);
-});
