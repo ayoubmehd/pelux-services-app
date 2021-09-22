@@ -23,12 +23,12 @@ class ServiceFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-        'description' => $this->faker->text,
-        'lat' => $this->faker->randomDigitNotNull,
-        'long' => $this->faker->randomDigitNotNull,
-        'city_id' => $this->faker->word,
-        'provider_id' => $this->faker->word,
-        'is_publised' => $this->faker->word
+            'description' => $this->faker->text,
+            'lat' => $this->faker->randomDigitNotNull,
+            'long' => $this->faker->randomDigitNotNull,
+            'city_id' => $this->faker->word,
+            'provider_id' => $this->faker->word,
+            'is_publised' => $this->faker->word
         ];
     }
 }

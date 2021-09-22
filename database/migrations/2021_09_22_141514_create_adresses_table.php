@@ -15,7 +15,7 @@ class CreateAdressesTable extends Migration
     public function up()
     {
         Schema::create('adresses', function (Blueprint $table) {
-            $table->bigInteger('id', true, true);
+            $table->id();
             $table->string('ligne1', 255);
             $table->string('ligne2', 255);
             $table->bigInteger('city_id')->unsigned();
