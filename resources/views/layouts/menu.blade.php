@@ -30,3 +30,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('admin.services.index') }}"
+       class="nav-link {{ Request::is('admin/services*') ? 'active' : '' }}">
+        <p>Services</p>
+    </a>
+</li>
+
+
