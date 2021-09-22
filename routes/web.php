@@ -18,18 +18,13 @@ Route::get('/', function () {
 });
 
 Route::name('admin.')->prefix('admin')->group(function () {
-    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+
+    Route::resource('cities', App\Http\Controllers\Admin\CityController::class);
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class, ["as" => 'admin']);
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('cities', App\Http\Controllers\Admin\CityController::class, ["as" => 'admin']);
-});
