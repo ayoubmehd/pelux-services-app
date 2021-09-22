@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateCityRequest;
 use App\Http\Requests\Admin\UpdateCityRequest;
-use App\Repositories\Admin\CityRepository;
+use App\Repositories\CityRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
