@@ -6,3 +6,19 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('admin.categories.index') }}"
+       class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
+        <p>Categories</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('admin.cities.index') }}"
+       class="nav-link {{ Request::is('admin/cities*') ? 'active' : '' }}">
+        <p>Cities</p>
+    </a>
+</li>
+
+
