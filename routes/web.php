@@ -17,8 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::resource('users', App\Http\Controllers\UserController::class);
+Route::name('admin.')->prefix('admin')->group(function () {
+    Route::resource('users', App\Http\Controllers\UserController::class);
+});
 
 Auth::routes();
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class User
  * @package App\Models\Admin
- * @version September 22, 2021, 11:34 am UTC
+ * @version September 22, 2021, 11:59 am UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $orders
  * @property \Illuminate\Database\Eloquent\Collection $services

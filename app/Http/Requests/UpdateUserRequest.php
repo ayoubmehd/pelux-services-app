@@ -26,7 +26,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $rules = User::$rules;
-        
+
+        $rules['password'] = 'nullable|string|max:255|string|max:255';
+
         return $rules;
     }
 }
