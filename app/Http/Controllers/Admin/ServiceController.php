@@ -59,7 +59,7 @@ class ServiceController extends AppBaseController
             $citiesSelect[$city['id']] = $city['label'];
         }
 
-        $providers = $userRep->allQuery()->get()->toArray();
+        $providers = $userRep->allQuery(['role' => 'provider'])->get()->toArray();
         $providersSelect = [-1 => 'Select a provider'];
         foreach ($providers as $provider) {
             $providersSelect[$provider['id']] = $provider['name'];

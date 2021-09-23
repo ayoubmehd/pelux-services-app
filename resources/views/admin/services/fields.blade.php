@@ -21,9 +21,6 @@
     @endforeach
     @endif
     @endisset
-
-
-
 </div>
 
 <!-- Lat Field -->
