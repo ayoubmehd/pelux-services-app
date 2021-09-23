@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Repositories\ServiceRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\CityRepository;
+use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Http\Resources\CategoryResource;
 
 class ServiceController extends AppBaseController
 {
@@ -40,9 +44,28 @@ class ServiceController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(CategoryRepository $catRepo, CityRepository $cityRepo, UserRepository $userRep)
     {
-        return view('admin.services.create');
+        $categories = $catRepo->allQuery()->get()->toArray();
+
+        $categoriesSelect = [-1 => 'Select Categories'];
+        foreach ($categories as $category) {
+            $categoriesSelect[$category['id']] = $category['name'];
+        }
+
+        $cities = $cityRepo->allQuery()->get()->toArray();
+        $citiesSelect = [-1 => 'Select a city'];
+        foreach ($cities as $city) {
+            $citiesSelect[$city['id']] = $city['label'];
+        }
+
+        $providers = $userRep->allQuery()->get()->toArray();
+        $providersSelect = [-1 => 'Select a provider'];
+        foreach ($providers as $provider) {
+            $providersSelect[$provider['id']] = $provider['name'];
+        }
+
+        return view('admin.services.create', \compact('categoriesSelect', 'citiesSelect', 'providersSelect'));
     }
 
     /**

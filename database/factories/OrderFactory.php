@@ -25,8 +25,8 @@ class OrderFactory extends Factory
             'status' => $this->faker->randomElement(['confirmed', 'canceled', 'finished']),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-            'service_id' => $this->faker->word,
-            'user_id' => $this->faker->word
+            'service_id' => $this->faker->word(),
+            'user_id' => $this->faker->word()
         ];
     }
 }

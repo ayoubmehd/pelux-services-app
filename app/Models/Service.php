@@ -27,7 +27,7 @@ class Service extends Model
     use HasFactory;
 
     public $table = 'services';
-    
+
 
 
 
@@ -36,8 +36,6 @@ class Service extends Model
         'description',
         'lat',
         'long',
-        'city_id',
-        'provider_id',
         'is_publised'
     ];
 
@@ -77,7 +75,15 @@ class Service extends Model
      **/
     public function city()
     {
-        return $this->belongsTo(\App\Models\City::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     **/
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_service');
     }
 
     /**
@@ -85,6 +91,6 @@ class Service extends Model
      **/
     public function provider()
     {
-        return $this->belongsTo(\App\Models\User::class, 'provider_id');
+        return $this->belongsTo(User::class, 'provider_id');
     }
 }

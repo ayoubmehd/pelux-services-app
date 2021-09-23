@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
+use App\Models\Category;
+use App\Models\Service;
+use \App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +17,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        User::factory()->state(['role' => 'admin'])->create();
+        City::factory(1)->create();
+        Category::factory(3)->create();
+
+        Service::factory(1)
+            ->for(
+                User::factory()->state(['role' => 'provider']),
+                'provider'
+            )
+            ->for(
+                City::factory(),
+            )
+            ->has(
+                Category::factory(3),
+            )
+            ->create();
     }
 }

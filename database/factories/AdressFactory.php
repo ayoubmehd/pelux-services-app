@@ -22,11 +22,11 @@ class AdressFactory extends Factory
     public function definition()
     {
         return [
-            'ligne1' => $this->faker->word,
-        'ligne2' => $this->faker->word,
-        'created_at' => $this->faker->date('Y-m-d H:i:s'),
-        'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-        'city_id' => $this->faker->word
+            'ligne1' => $this->faker->word(),
+            'ligne2' => $this->faker->word(),
+            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'updated_at' => $this->faker->date('Y-m-d H:i:s'),
+            'city_id' => $this->faker->word()
         ];
     }
 }

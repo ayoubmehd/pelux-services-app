@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Admin\City;
+use App\Models\City;
 
 class CreateCityRequest extends FormRequest
 {

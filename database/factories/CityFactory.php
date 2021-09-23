@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\Admin;
+namespace Database\Factories;
 
-use App\Models\Admin\City;
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CityFactory extends Factory
@@ -22,9 +22,9 @@ class CityFactory extends Factory
     public function definition()
     {
         return [
-            'label' => $this->faker->word,
-        'created_at' => $this->faker->date('Y-m-d H:i:s'),
-        'updated_at' => $this->faker->date('Y-m-d H:i:s')
+            'label' => $this->faker->city(),
+            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }

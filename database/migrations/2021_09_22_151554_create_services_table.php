@@ -25,6 +25,7 @@ class CreateServicesTable extends Migration
             $table->boolean('is_publised')->nullable();
             $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('provider_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
