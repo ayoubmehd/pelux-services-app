@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
@@ -34,3 +34,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/{any?}', function () {
+    return view('users');
+})->where("any", "[\/\w\.-]*");
