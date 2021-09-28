@@ -33,7 +33,13 @@ class ServiceController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $services = $this->serviceRepository->all();
+        $services = $this->serviceRepository->paginate(
+            10,
+            ['id', 'title', 'description', 'is_publised', 'provider_id', 'city_id'],
+            ['city:id,label', 'provider:id,name']
+        );
+
+        \Debugbar::info($services);
 
         return view('admin.services.index')
             ->with('services', $services);
@@ -113,8 +119,29 @@ class ServiceController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(CategoryRepository $catRepo, CityRepository $cityRepo, UserRepository $userRep, $id)
     {
+
+        $categories = $catRepo->allQuery()->get()->toArray();
+
+        $categoriesSelect = [-1 => 'Select Categories'];
+        foreach ($categories as $category) {
+            $categoriesSelect[$category['id']] = $category['name'];
+        }
+
+        $cities = $cityRepo->allQuery()->get()->toArray();
+        $citiesSelect = [-1 => 'Select a city'];
+        foreach ($cities as $city) {
+            $citiesSelect[$city['id']] = $city['label'];
+        }
+
+        $providers = $userRep->allQuery(['role' => 'provider'])->get()->toArray();
+        $providersSelect = [-1 => 'Select a provider'];
+        foreach ($providers as $provider) {
+            $providersSelect[$provider['id']] = $provider['name'];
+        }
+
+
         $service = $this->serviceRepository->find($id);
 
         if (empty($service)) {
@@ -123,7 +150,7 @@ class ServiceController extends AppBaseController
             return redirect(route('admin.services.index'));
         }
 
-        return view('admin.services.edit')->with('service', $service);
+        return view('admin.services.edit', \compact('categoriesSelect', 'citiesSelect', 'providersSelect'))->with('service', $service);
     }
 
     /**

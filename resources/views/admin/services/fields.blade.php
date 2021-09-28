@@ -13,7 +13,11 @@
 <!-- City Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('categories', 'Categories:') !!}
-    {!! Form::select('categories', $categoriesSelect, null, ['class' => 'form-control custom-select']) !!}
+    {!!
+    Form::select('categories[]', $categoriesSelect, null,
+    ['class' => 'form-control custom-select','multiple' => true])
+    !!}
+
     @isset($service)
     @if($service->categories)
     @foreach ($service->categories as $cat)

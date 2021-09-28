@@ -16,6 +16,7 @@ class CreateCategoryServiceTable extends Migration
         Schema::create('category_service', function (Blueprint $table) {
             $table->foreignId('service_id')->constrained();
             $table->foreignId('category_id')->constrained();
+            $table->primary(['service_id', 'category_id']);
             $table->timestamps();
         });
     }
