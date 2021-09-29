@@ -44,7 +44,7 @@
                             :options="categories"
                             value-attribute="id"
                             text-attribute="name"
-                            placeholder="Select multiple options"
+                            placeholder="Select multiple categories"
                             v-model="form.categories"
                             id="categories"
                         ></t-rich-select>
@@ -54,11 +54,10 @@
                             City
                         </label>
                         <t-rich-select
-                            :close-on-select="false"
                             :options="cities"
                             value-attribute="id"
                             text-attribute="label"
-                            placeholder="Select multiple options"
+                            placeholder="Select a city"
                             v-model="form.city"
                             id="city"
                         ></t-rich-select>
@@ -71,6 +70,8 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import { mapState } from "vuex";
+
 export default {
     components: {
         VueEditor
@@ -91,38 +92,6 @@ export default {
     data() {
         return {
             autoSave: true,
-            categories: [
-                {
-                    id: 1,
-                    name: "Fashion"
-                },
-                {
-                    id: 2,
-                    name: "Electronique"
-                },
-                {
-                    id: 3,
-                    name: "Mecanique"
-                }
-            ],
-            cities: [
-                {
-                    id: 1,
-                    label: "Marakech"
-                },
-                {
-                    id: 2,
-                    label: "Safi"
-                },
-                {
-                    id: 3,
-                    label: "Casablanca"
-                },
-                {
-                    id: 4,
-                    label: "Rabat"
-                }
-            ],
             toolbar: [
                 [
                     "bold",
@@ -137,6 +106,12 @@ export default {
                 ["image"]
             ]
         };
+    },
+    computed: {
+        ...mapState({
+            cities: state => state.cities.cities.data,
+            categories: state => state.categories.categories.data
+        })
     },
     methods: {
         Save() {
@@ -155,6 +130,10 @@ export default {
             },
             deep: true
         }
+    },
+    mounted() {
+        this.$store.dispatch("fetchCities");
+        this.$store.dispatch("fetchCategories");
     }
 };
 </script>
