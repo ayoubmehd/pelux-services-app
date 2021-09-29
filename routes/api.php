@@ -21,3 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('provider')->group(function () {
     Route::apiResource('services', App\Http\Controllers\Provider\ServiceController::class);
 });
+
+Route::apiResource('categories', App\Http\Controllers\CategoryController::class)
+    ->only(['index']);
+
+Route::apiResource('cities', App\Http\Controllers\CityController::class)
+    ->only(['index']);
