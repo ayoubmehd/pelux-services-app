@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!-- <navbar />
-        <sidebar /> -->
+        <navbar />
         <main>
             <slot></slot>
         </main>
@@ -9,13 +8,11 @@
 </template>
 
 <script>
-// import Navbar from "../Navbar.vue";
-// import Sidebar from "../Sidebar.vue";
+import Navbar from "../Navbar.vue";
 
 export default {
     components: {
-        // Navbar,
-        // Sidebar
+        Navbar
     }
 };
 </script>

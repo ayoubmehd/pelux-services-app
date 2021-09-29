@@ -1,6 +1,5 @@
 <template>
     <layout>
-        <t-input></t-input>
         <router-view></router-view>
     </layout>
 </template>
