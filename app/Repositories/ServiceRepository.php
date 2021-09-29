@@ -61,6 +61,28 @@ class ServiceRepository extends BaseRepository
     }
 
     /**
+     * Create model record
+     *
+     * @param array $input
+     *
+     * @return Model
+     */
+    public function create($input)
+    {
+        $model = $this->model->newInstance(\collect($input)->except(['city_id', 'categories'])->toArray());
+
+        $model->city()->associate($input['city_id']);
+
+        $model->provider_id = 1; // Change this to auth()->user()->id when you implement auth
+
+        $model->save();
+
+        $model->categories()->sync($input['categories']);
+
+        return $model;
+    }
+
+    /**
      * Override update method
      * Update model record for given id
      *
