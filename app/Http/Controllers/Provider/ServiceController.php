@@ -45,6 +45,8 @@ class ServiceController extends Controller
         // return \response()->json($input);
 
         $service = $this->serviceRepository->create($input);
+
+        return \response()->json($service);
     }
 
     /**
@@ -67,7 +69,20 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = $this->serviceRepository->find($id);
+
+        if (empty($service)) {
+            return \response()->json([
+                'error' => 'Service not found'
+            ], 404);
+        }
+
+        $service = $this->serviceRepository->update($request->all(), $id);
+
+        return \response()->json([
+            'message' => 'Service updated successfully',
+            'data' => $service
+        ]);
     }
 
     /**

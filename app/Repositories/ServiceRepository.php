@@ -77,7 +77,8 @@ class ServiceRepository extends BaseRepository
 
         $model->save();
 
-        $model->categories()->sync($input['categories']);
+        if (isset($input['categories']))
+            $model->categories()->sync($input['categories']);
 
         return $model;
     }
@@ -99,7 +100,9 @@ class ServiceRepository extends BaseRepository
 
         $model->fill(\collect($input)->except(['categories'])->toArray());
 
-        $model->categories()->sync($input['categories']);
+
+        if (isset($input['categories']))
+            $model->categories()->sync($input['categories']);
 
         $model->push();
 

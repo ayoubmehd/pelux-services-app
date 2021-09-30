@@ -1,9 +1,15 @@
 <template>
-    <editor :form="form" />
+    <editor
+        :form="form"
+        @save="saveService"
+        @autoSave="saveService"
+        @publish="publishService"
+    />
 </template>
 
 <script>
 import Editor from "../components/service/Editor.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
     components: {
@@ -12,12 +18,26 @@ export default {
     data() {
         return {
             form: {
-                title: "Service Title",
-                content: "dfsakfjlasfkdjsalfkhdf",
-                categories: [1, 2],
-                city: 2
+                title: "",
+                content: "",
+                categories: [],
+                city: null
             }
         };
+    },
+    computed: {
+        ...mapState({
+            isLoading: state => state.isLoading,
+            error: state => state.error
+        })
+    },
+    methods: {
+        saveService(data) {
+            this.$store.dispatch("services/saveService", data);
+        },
+        publishService(data) {
+            this.$store.dispatch("services/publishService", data);
+        }
     }
 };
 </script>

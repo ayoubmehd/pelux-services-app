@@ -28,10 +28,13 @@
                         @click="Save"
                         class="ml-auto mr-2"
                         variant="secondary"
+                        :disabled="isLoading"
                     >
                         Save Draft
                     </t-button>
-                    <t-button @click="Publish">Publish</t-button>
+                    <t-button @click="Publish" :disabled="isLoading">
+                        Publish
+                    </t-button>
                 </div>
                 <div class="pt-8">
                     <div class="pb-3">
@@ -110,7 +113,9 @@ export default {
     computed: {
         ...mapState({
             cities: state => state.cities.cities.data,
-            categories: state => state.categories.categories.data
+            categories: state => state.categories.categories.data,
+            isLoading: state => state.isLoading,
+            error: state => state.error
         })
     },
     methods: {
