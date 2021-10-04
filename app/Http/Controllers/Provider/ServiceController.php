@@ -39,10 +39,13 @@ class ServiceController extends Controller
         // This will need some validation
         $input = $request->all();
 
+
+        /**
+         * Todo:
+         *      - implement google places api
+         */
         $input['lat'] = 1;
         $input['long'] = 2;
-
-        // return \response()->json($input);
 
         $service = $this->serviceRepository->create($input);
 

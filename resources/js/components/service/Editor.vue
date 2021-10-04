@@ -36,6 +36,12 @@
                         Publish
                     </t-button>
                 </div>
+
+                <!--
+                    TODO:
+                        - build a search functionality
+                            Resource : https://www.vue-tailwind.com/docs/rich-select/#label-slot
+                -->
                 <div class="pt-8">
                     <div class="pb-3">
                         <label for="categories" class="px-1 pb-1.5">
@@ -52,6 +58,12 @@
                             id="categories"
                         ></t-rich-select>
                     </div>
+
+                    <!--
+                    TODO:
+                        - build a search functionality
+                            Resource : https://www.vue-tailwind.com/docs/rich-select/#label-slot
+                         -->
                     <div>
                         <label for="city" class="px-1 pb-1.5">
                             City
