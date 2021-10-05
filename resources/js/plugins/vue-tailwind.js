@@ -104,6 +104,43 @@ const settings = {
             }
 
         }
+    },
+    't-card': {
+        component: TCard,
+        props: {
+            fixedClasses: {
+                wrapper: 'border rounded shadow-sm ',
+                body: '',
+                header: 'border-b p-3 rounded-t',
+                footer: 'border-t p-3 rounded-b'
+            },
+            classes: {
+                wrapper: 'bg-white border-gray-100',
+                body: '',
+                header: 'border-gray-100',
+                footer: 'border-gray-100'
+            },
+            variants: {
+                danger: {
+                    wrapper: 'bg-red-50 text-red-700 border-red-200',
+                    header: 'border-red-200 text-red-700',
+                    footer: 'border-red-200 text-red-700'
+                }
+            }
+        }
+    },
+    't-tag': {
+        component: TTag,
+        props: {
+            fixedClasses: '',
+            variants: {
+                title: 'text-2xl leading-8 font-extrabold text-gray-900 tracking-tight',
+                subtitle: 'text-lg leading-6 font-medium text-gray-900',
+                error: 'text-red-500',
+                badge: 'inline-flex items-center px-3 rounded-full text-xs font-medium leading-4 bg-gray-100 text-gray-800',
+                avatar: 'inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500 overflow-hidden leading-none text-center'
+            }
+        }
     }
 }
 
