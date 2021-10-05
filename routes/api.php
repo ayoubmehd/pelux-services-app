@@ -27,3 +27,6 @@ Route::apiResource('categories', App\Http\Controllers\CategoryController::class)
 
 Route::apiResource('cities', App\Http\Controllers\CityController::class)
     ->only(['index']);
+
+Route::apiResource('services', App\Http\Controllers\ServiceController::class)
+    ->only(['index', 'show']);

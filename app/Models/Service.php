@@ -34,6 +34,7 @@ class Service extends Model
     public $fillable = [
         'title',
         'description',
+        'excerpt',
         'lat',
         'long',
         'is_publised'
@@ -48,6 +49,7 @@ class Service extends Model
         'id' => 'integer',
         'title' => 'string',
         'description' => 'string',
+        'excerpt' => 'string',
         'lat' => 'float',
         'long' => 'float',
         'city_id' => 'integer',
@@ -92,5 +94,13 @@ class Service extends Model
     public function provider()
     {
         return $this->belongsTo(User::class, 'provider_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
