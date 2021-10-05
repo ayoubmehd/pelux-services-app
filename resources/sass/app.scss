@@ -11,3 +11,9 @@
 body {
     @apply bg-page-bg;
 }
+
+$prefix: ".service-";
+
+#{$prefix}container {
+    @apply container mx-auto px-8 md:px-12 py-8;
+}
