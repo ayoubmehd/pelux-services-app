@@ -23,7 +23,6 @@
                 >
                     #{{ tag }}
                 </t-tag>
-
                 <component
                     :is="validHeadingTag"
                     class="font-bold"
@@ -73,11 +72,12 @@ export default {
         headingSize() {
             const headingSizes = ["5xl", "4xl", "3xl", "2xl", "xl", "lg"];
 
+            const hs = headingSizes[this.headingLevel - 1]
+                ? headingSizes[this.headingLevel - 1]
+                : "4xl";
+
             return {
-                [`text-${headingSizes[this.headingLevel - 1]}`]: !!headingSizes[
-                    this.headingLevel - 1
-                ],
-                "text-4xl": !headingSizes[this.headingLevel - 1]
+                [`text-${hs}`]: !!hs
             };
 
             // return headingSizes[this.headingLevel - 1]
