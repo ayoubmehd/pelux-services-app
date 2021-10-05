@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Service;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Str;
 
 /**
  * Class ServiceRepository
@@ -61,6 +62,21 @@ class ServiceRepository extends BaseRepository
     }
 
     /**
+     * Find model record for given id
+     *
+     * @param int $id
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    public function find($id, $columns = ['*'], $with = [], $withCount = [])
+    {
+        $query = $this->model->newQuery();
+
+        return $query->with($with)->withCount($withCount)->find($id, $columns);
+    }
+
+    /**
      * Create model record
      *
      * @param array $input
@@ -69,6 +85,9 @@ class ServiceRepository extends BaseRepository
      */
     public function create($input)
     {
+
+        $input['excerpt'] = Str::limit(\strip_tags($input['description']), 200, '...');
+
         $model = $this->model->newInstance(\collect($input)->except(['city_id', 'categories'])->toArray());
 
         $model->city()->associate($input['city_id']);
