@@ -2,6 +2,7 @@
 // import Register from "../views/Register.vue";
 // import Home from "../views/Home.vue";
 import NewService from "../views/NewService.vue";
+import SingleService from "../views/SingleService.vue";
 
 const routes = [
     // {
@@ -16,6 +17,11 @@ const routes = [
         path: "/services/new",
         name: "NewService",
         component: NewService,
+    },
+    {
+        path: "/services/:id",
+        name: "NewService",
+        component: SingleService,
     }
 
 
