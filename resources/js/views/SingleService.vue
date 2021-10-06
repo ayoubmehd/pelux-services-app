@@ -6,12 +6,6 @@
                     <t-button class="mr-2" variant="secondary">
                         Finish Order
                     </t-button>
-
-                    <!-- This button will be shown if the sevice is ordered by the logged in user -->
-                    <!-- <t-button class="mr-2" variant="secondary">
-                        Cancel Order
-                    </t-button> -->
-                    <!-- This button will be hidden if the sevice is ordered by the logged in user -->
                     <t-button>Get Service</t-button>
                 </div>
                 <div class="flex justify-between items-center mt-6 mb-3">

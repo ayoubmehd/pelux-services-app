@@ -133,3 +133,31 @@ export default {
 
 <style></style>
 ```
+
+### Buttons Options
+
+This button will be shown if the sevice is ordered by the logged in user
+
+```html
+<t-button class="mr-2" variant="secondary">
+    Cancel Order
+</t-button>
+```
+
+This button will be shown if the sevice belong to the logged in provider
+
+```html
+<t-button class="mr-2" variant="secondary">
+    View Orders
+</t-button> 
+```
+
+This button will be shown if the sevice belong to the logged in provider
+```html
+<t-button>Edit</t-button>
+```
+
+This button will be hidden if the sevice is ordered by the logged in user 
+```html
+<t-button>Get Service</t-button>
+```
