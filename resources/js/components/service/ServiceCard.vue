@@ -17,20 +17,20 @@
             <slot name="top"></slot>
             <div :class="isFull ? 'w-2/3' : ''">
                 <t-tag
-                    v-for="tag in ['photography', 'travel', 'winter']"
-                    :key="tag"
+                    v-for="tag in service.categories"
+                    :key="tag.id"
                     variant="badge"
                 >
-                    #{{ tag }}
+                    #{{ tag.name }}
                 </t-tag>
                 <component
                     :is="validHeadingTag"
                     class="font-bold"
                     :class="{ ...headingMargin, ...headingSize }"
                 >
-                    Can coffee make you a better developer?
+                    {{ service.title }}
                 </component>
-                <div class="flex" :class="reviewsMargin">
+                <!-- <div class="flex" :class="reviewsMargin">
                     <svg
                         v-for="i in 5"
                         class="mx-1 w-4 h-4 fill-current"
@@ -42,11 +42,9 @@
                             d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
                         />
                     </svg>
-                </div>
+                </div> -->
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
+                    {{ service.excerpt }}
                 </p>
             </div>
             <div class="flex flex-col items-end">
@@ -66,6 +64,10 @@ export default {
         headingLevel: {
             type: Number,
             default: 2
+        },
+        service: {
+            type: Object,
+            default: () => ({})
         }
     },
     computed: {
