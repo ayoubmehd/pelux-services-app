@@ -2,7 +2,7 @@
 // import Register from "../views/Register.vue";
 // import Home from "../views/Home.vue";
 import NewService from "../views/provider/NewService.vue";
-// import ProviderSingleService from "../views/provider/SingleService.vue";
+import SingleOrder from "../views/provider/SingleOrder.vue";
 import SingleService from "../views/SingleService.vue";
 
 const routes = [
@@ -24,11 +24,11 @@ const routes = [
         name: "SingleService",
         component: SingleService,
     },
-    // {
-    //     path: "provider/services/:id",
-    //     name: "ProviderSingleService",
-    //     component: ProviderSingleService,
-    // },
+    {
+        path: "/provider/orders/:id",
+        name: "SingleOrder",
+        component: SingleOrder,
+    },
 
 ];
 
