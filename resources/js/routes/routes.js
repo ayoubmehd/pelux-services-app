@@ -1,7 +1,8 @@
 // import Login from "../views/Login.vue";
 // import Register from "../views/Register.vue";
 // import Home from "../views/Home.vue";
-import NewService from "../views/NewService.vue";
+import NewService from "../views/provider/NewService.vue";
+// import ProviderSingleService from "../views/provider/SingleService.vue";
 import SingleService from "../views/SingleService.vue";
 
 const routes = [
@@ -20,10 +21,14 @@ const routes = [
     },
     {
         path: "/services/:id",
-        name: "NewService",
+        name: "SingleService",
         component: SingleService,
-    }
-
+    },
+    // {
+    //     path: "provider/services/:id",
+    //     name: "ProviderSingleService",
+    //     component: ProviderSingleService,
+    // },
 
 ];
 

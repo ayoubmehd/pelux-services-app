@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Editor from "../components/service/Editor.vue";
+import Editor from "../../components/service/Editor.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
