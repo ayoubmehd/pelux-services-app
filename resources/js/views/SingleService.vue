@@ -1,26 +1,19 @@
 <template>
     <div class="service-container">
-        <service-card :imgSrc="imgSrc">
-            <template v-slot:top>
-                <div class="w-full flex justify-between items-center mb-4">
-                    <p class="text-2xl font-bold">Order Confirmed</p>
-
-                    <div class="flex justify-between items-center mt-6 mb-3">
-                        <t-tag variant="avatar" class="mx-2">
-                            <img
-                                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80"
-                                alt=""
-                            />
-                        </t-tag>
-                        <p class="text-xs">
-                            Jonathan Reinink <br />
-                            Aug 8
-                        </p>
-                    </div>
-                </div>
-            </template>
+        <service-card :service="service" :imgSrc="imgSrc">
             <template v-slot:more>
-                <t-button>Get Service</t-button>
+                <div class="flex">
+                    <t-button class="mr-2" variant="secondary">
+                        Finish Order
+                    </t-button>
+
+                    <!-- This button will be shown if the sevice is ordered by the logged in user -->
+                    <!-- <t-button class="mr-2" variant="secondary">
+                        Cancel Order
+                    </t-button> -->
+                    <!-- This button will be hidden if the sevice is ordered by the logged in user -->
+                    <t-button>Get Service</t-button>
+                </div>
                 <div class="flex justify-between items-center mt-6 mb-3">
                     <t-tag variant="avatar" class="mx-2">
                         <img
@@ -28,26 +21,20 @@
                             alt=""
                         />
                     </t-tag>
-                    <p class="text-xs">
-                        Jonathan Reinink <br />
-                        Aug 8
+                    <p v-if="provider" class="text-xs">
+                        {{ provider.name }} <br />
+                        {{ provider.created_at }}
                     </p>
                 </div>
-                <p class="font-bold">30 Sells</p>
+                <p class="font-bold">{{ service.orders_count }} Sells</p>
             </template>
         </service-card>
-
-        <div class="flex flex-wrap -mx-2">
-            <div v-for="i in 4" class="px-2 mb-4 w-1/3">
-                <service-card :headingLevel="4" :imgSrc="imgSrc">
-                </service-card>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
 import ServiceCard from "../components/service/ServiceCard.vue";
+import { mapState } from "vuex";
 
 export default {
     components: { ServiceCard },
@@ -55,6 +42,27 @@ export default {
         return {
             imgSrc: `https://images.unsplash.com/photo-1517231925375-bf2cb42917a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80`
         };
+    },
+    computed: {
+        ...mapState({
+            service: state => state.userServices.service
+        }),
+        provider() {
+            /**
+             * Todo:Filter Date In the backend
+             */
+            return {
+                name: this.service.provider ? this.service.provider.name : "",
+                created_at: this.service.provider
+                    ? new Date(
+                          this.service.provider.created_at
+                      ).toLocaleDateString("fr")
+                    : ""
+            };
+        }
+    },
+    mounted() {
+        this.$store.dispatch("fetchService", this.$route.params.id);
     }
 };
 </script>

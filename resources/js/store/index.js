@@ -4,6 +4,7 @@ import Vuex, { createLogger } from 'vuex';
 import cities from "./modules/cities.js";
 import categories from "./modules/categories";
 import services from "./modules/provider/services.js";
+import userServices from "./modules/services.js";
 
 Vue.use(Vuex);
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     modules: {
         cities,
         categories,
-        services
+        services,
+        userServices
     },
     plugins: debug ? [createLogger()] : []
 });
