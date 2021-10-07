@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Category;
+use App\Models\Keyword;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -18,20 +19,23 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        // Order::factory(20)->for(
-        //     Service::factory()
-        //         ->for(
-        //             User::factory()->state(['role' => 'provider']),
-        //             'provider'
-        //         )
-        //         ->for(
-        //             City::factory(),
-        //         )
-        //         ->has(
-        //             Category::factory(3),
-        //         )
-        // )->for(
-        //     User::factory()
-        // )->create();
+        Order::factory(20)->for(
+            Service::factory()
+                ->for(
+                    User::factory()->state(['role' => 'provider']),
+                    'provider'
+                )
+                ->for(
+                    City::factory(),
+                )
+                ->for(
+                    Category::factory(),
+                )
+                ->has(
+                    Keyword::factory()
+                )
+        )->for(
+            User::factory()
+        )->create();
     }
 }
