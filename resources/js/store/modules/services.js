@@ -1,4 +1,4 @@
-import { getService } from "../../api/services.js";
+import { getService, getSimilarServices } from "../../api/services.js";
 
 export default {
     state: () => ({
@@ -8,6 +8,9 @@ export default {
     mutations: {
         setService(state, payload) {
             state.service = payload;
+        },
+        setServices(state, payload) {
+            state.services = payload;
         }
     },
     actions: {
@@ -19,6 +22,15 @@ export default {
                 commit('setError', error);
             }
             commit('setService', service);
+        },
+        async fetchSimilarServices({ commit }, id) {
+            commit('setLoading', true);
+            const [services, error] = await getSimilarServices(id);
+            commit('setLoading', false);
+            if (error) {
+                commit('setError', error);
+            }
+            commit('setServices', services);
         }
     },
     getters: {}

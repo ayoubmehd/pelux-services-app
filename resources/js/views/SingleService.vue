@@ -52,9 +52,14 @@
                 <router-view></router-view>
             </div>
             <aside class="w-1/3 px-3">
-                <service-card></service-card>
-                <service-card></service-card>
-                <service-card></service-card>
+                <service-card
+                    v-for="service in services"
+                    :headingLevel="4"
+                    :service="service"
+                    :key="service.id"
+                    :imgSrc="imgSrc"
+                    class="mb-3"
+                ></service-card>
             </aside>
         </section>
     </div>
@@ -73,7 +78,8 @@ export default {
     },
     computed: {
         ...mapState({
-            service: state => state.userServices.service
+            service: state => state.userServices.service,
+            services: state => state.userServices.services
         }),
         provider() {
             /**
@@ -91,6 +97,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch("fetchService", this.$route.params.id);
+        this.$store.dispatch("fetchSimilarServices", this.$route.params.id);
     }
 };
 </script>
