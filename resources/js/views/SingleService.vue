@@ -23,6 +23,40 @@
                 <p class="font-bold">{{ service.orders_count }} Sells</p>
             </template>
         </service-card>
+
+        <section class="flex justify-between py-8 -mx-3">
+            <div class="w-2/3 px-3">
+                <t-card class="mb-3">
+                    <nav class="p-2">
+                        <ul class="flex">
+                            <li>
+                                <t-button
+                                    tag="router-link"
+                                    :to="{ name: 'Description' }"
+                                    variant="link"
+                                >
+                                    Description
+                                </t-button>
+                            </li>
+                            <li>
+                                <!-- <router-link
+                                    tag="t-button"
+                                    :to="{ name: 'Reviews' }"
+                                >
+                                    Reviews
+                                </router-link> -->
+                            </li>
+                        </ul>
+                    </nav>
+                </t-card>
+                <router-view></router-view>
+            </div>
+            <aside class="w-1/3 px-3">
+                <service-card></service-card>
+                <service-card></service-card>
+                <service-card></service-card>
+            </aside>
+        </section>
     </div>
 </template>
 

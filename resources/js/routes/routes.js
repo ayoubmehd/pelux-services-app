@@ -4,6 +4,7 @@
 import NewService from "../views/provider/NewService.vue";
 import SingleOrder from "../views/provider/SingleOrder.vue";
 import SingleService from "../views/SingleService.vue";
+import Description from "../views/service/Description.vue";
 
 const routes = [
     // {
@@ -23,6 +24,13 @@ const routes = [
         path: "/services/:id",
         name: "SingleService",
         component: SingleService,
+        children: [
+            {
+                path: "/",
+                name: "Description",
+                component: Description,
+            }
+        ]
     },
     {
         path: "/provider/orders/:id",
