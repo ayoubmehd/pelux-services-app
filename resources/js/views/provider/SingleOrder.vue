@@ -25,6 +25,45 @@
                 <p class="font-bold">{{ service.orders_count }} Sells</p>
             </template>
         </service-card>
+        <section class="flex justify-between py-8 -mx-3">
+            <div class="w-2/3 px-3">
+                <t-card class="mb-3">
+                    <nav class="p-2">
+                        <ul class="flex">
+                            <li>
+                                <t-button
+                                    tag="router-link"
+                                    :to="{ name: 'OrderDescription' }"
+                                    variant="link"
+                                >
+                                    Description
+                                </t-button>
+                            </li>
+                            <li>
+                                <t-button
+                                    tag="router-link"
+                                    :to="{ name: 'Orders' }"
+                                    variant="link"
+                                >
+                                    Orders
+                                </t-button>
+                            </li>
+                        </ul>
+                    </nav>
+                </t-card>
+                <router-view></router-view>
+            </div>
+            <aside class="w-1/3 px-3">
+                <!-- <service-card
+                    v-for="service in services"
+                    :headingLevel="4"
+                    :service="service"
+                    :key="service.id"
+                    :imgSrc="imgSrc"
+                    class="mb-3"
+                ></service-card> -->
+            </aside>
+        </section>
     </div>
 </template>
 
@@ -41,11 +80,9 @@ export default {
     },
     computed: {
         ...mapState({
-            order: state => state.orders.order
+            order: state => state.orders.order,
+            service: state => state.userServices.service
         }),
-        service() {
-            return this.order.service ? this.order.service : {};
-        },
         provider() {
             if (!this.service)
                 return {
@@ -68,7 +105,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch("orders/fetchOrder", this.$route.params.id);
-        // console.debug(this.$store.state);
     }
 };
 </script>

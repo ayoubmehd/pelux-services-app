@@ -19,6 +19,8 @@ export default {
             if (error) {
                 commit('setError', error, { root: true });
             }
+            commit('setService', order.service, { root: true });
+            delete order.service;
             commit('setOrder', order);
         }
     },
