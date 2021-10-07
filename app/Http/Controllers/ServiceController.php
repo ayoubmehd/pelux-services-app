@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Service;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ServiceRepository;
 
@@ -61,5 +64,18 @@ class ServiceController extends Controller
         );
 
         return \response()->json($service);
+    }
+
+    /**
+     * Show services in the same category.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function similars(Request $request, $id)
+    {
+        $services = Service::find($id)->category->services()->where('is_publised', 1)->inRandomOrder()->limit(4)->get(['id', 'title', 'excerpt']);
+
+        return \response()->json($services);
     }
 }

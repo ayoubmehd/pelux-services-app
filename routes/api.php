@@ -31,3 +31,7 @@ Route::apiResource('cities', App\Http\Controllers\CityController::class)
 
 Route::apiResource('services', App\Http\Controllers\ServiceController::class)
     ->only(['index', 'show']);
+
+Route::prefix('services')->group(function () {
+    Route::get('/{id}/similars', [App\Http\Controllers\ServiceController::class, 'similars']);
+});
