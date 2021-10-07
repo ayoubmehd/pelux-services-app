@@ -50,10 +50,10 @@ class Category extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function services()
     {
-        return $this->belongsToMany(\App\Models\Admin\Service::class, 'services_categores');
+        return $this->hasMany(Service::class);
     }
 }
