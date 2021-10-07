@@ -36,6 +36,13 @@ const routes = [
         path: "/provider/orders/:id",
         name: "SingleOrder",
         component: SingleOrder,
+        children: [
+            {
+                path: "/",
+                name: "OrderDescription",
+                component: Description,
+            }
+        ]
     },
 
 ];
