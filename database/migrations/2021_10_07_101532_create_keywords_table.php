@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddServiceColumn extends Migration
+class CreateKeywordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddServiceColumn extends Migration
      */
     public function up()
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->string('excerpt', 300)->nullable();
+        Schema::create('keywords', function (Blueprint $table) {
+            $table->id();
+            $table->string('tag', 255);
+            $table->string('slug', 255)->unique();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddServiceColumn extends Migration
      */
     public function down()
     {
-        Schema::table('services', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('keywords');
     }
 }

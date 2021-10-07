@@ -18,20 +18,20 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        Order::factory(20)->for(
-            Service::factory()
-                ->for(
-                    User::factory()->state(['role' => 'provider']),
-                    'provider'
-                )
-                ->for(
-                    City::factory(),
-                )
-                ->has(
-                    Category::factory(3),
-                )
-        )->for(
-            User::factory()
-        )->create();
+        // Order::factory(20)->for(
+        //     Service::factory()
+        //         ->for(
+        //             User::factory()->state(['role' => 'provider']),
+        //             'provider'
+        //         )
+        //         ->for(
+        //             City::factory(),
+        //         )
+        //         ->has(
+        //             Category::factory(3),
+        //         )
+        // )->for(
+        //     User::factory()
+        // )->create();
     }
 }

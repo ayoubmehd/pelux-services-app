@@ -25,6 +25,7 @@ class ServiceFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
+            'excerpt' => $this->faker->paragraph(2),
             'lat' => $this->faker->randomDigitNotNull(),
             'long' => $this->faker->randomDigitNotNull(),
             // 'city_id' => City::inRandomOrder()->get()->id,

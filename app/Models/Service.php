@@ -72,6 +72,10 @@ class Service extends Model
         'is_publised' => 'nullable|boolean|nullable|boolean'
     ];
 
+
+    /**
+     * Belongs To Relationships
+     */
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -83,9 +87,9 @@ class Service extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      **/
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class, 'category_service');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -102,5 +106,17 @@ class Service extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Belongs To Many Relationships
+     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     **/
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class);
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\City;
 use App\Models\Category;
+use App\Models\Keyword;
 use App\Models\Service;
 use \App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,7 +23,10 @@ class DatabaseSeeder extends Seeder
         City::factory(1)->create();
         Category::factory(3)->create();
 
-        Service::factory(1)
+        Service::factory(100)
+            ->has(
+                Keyword::factory(5)
+            )
             ->for(
                 User::factory()->state(['role' => 'provider']),
                 'provider'
@@ -30,8 +34,8 @@ class DatabaseSeeder extends Seeder
             ->for(
                 City::factory(),
             )
-            ->has(
-                Category::factory(3),
+            ->for(
+                Category::factory(),
             )
             ->create();
     }

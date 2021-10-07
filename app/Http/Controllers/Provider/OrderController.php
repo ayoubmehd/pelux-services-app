@@ -47,7 +47,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = $this->orderRepository->find($id, ['*'], ['service' => function ($query) {
-            $query->with('provider', 'categories')->withCount('orders');
+            $query->with('provider', 'category')->withCount('orders');
         }, 'user']);
 
         return \response()->json($order);

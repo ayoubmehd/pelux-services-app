@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('title', 255)->nullable();
             $table->text('description', 65535)->nullable();
+            $table->string('excerpt', 255)->nullable();
             $table->float('lat', 10, 0);
             $table->float('long', 10, 0);
             $table->bigInteger('city_id')->unsigned();
@@ -25,6 +26,7 @@ class CreateServicesTable extends Migration
             $table->boolean('is_publised')->nullable();
             $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('provider_id')->references('id')->on('users');
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }

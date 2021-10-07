@@ -48,7 +48,7 @@ class ServiceController extends Controller
         $with = [
             'city:id,label',
             'provider:id,name,created_at',
-            'categories:id,name'
+            'category:id,name'
         ];
 
         $withCount = ['orders'];
