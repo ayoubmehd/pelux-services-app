@@ -4,6 +4,7 @@
 import NewService from "../views/provider/NewService.vue";
 import SingleOrder from "../views/provider/SingleOrder.vue";
 import SingleService from "../views/SingleService.vue";
+import AllServices from "../views/AllServices.vue";
 import Description from "../views/service/Description.vue";
 
 const routes = [
@@ -15,6 +16,11 @@ const routes = [
     //         login: true,
     //     },
     // }
+    {
+        path: "/services",
+        name: "AllServices",
+        component: AllServices,
+    },
     {
         path: "/services/new",
         name: "NewService",

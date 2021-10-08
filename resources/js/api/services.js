@@ -29,3 +29,13 @@ export async function getSimilarServices(id) {
         return [null, error];
     }
 }
+
+export async function getServices(query) {
+    try {
+        const response = await axios.get(`/api/services/${query}`);
+
+        return [response.data, null];
+    } catch (error) {
+        return [null, error];
+    }
+}

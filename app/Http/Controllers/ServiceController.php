@@ -26,7 +26,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = $this->serviceRepository->allQuery()->cursorPaginate(20, ['id', 'title', 'excerpt']);
+
+        return \response()->json($services);
     }
 
     /**
