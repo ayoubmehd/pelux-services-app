@@ -15,8 +15,7 @@ class CreateKeywordsTable extends Migration
     {
         Schema::create('keywords', function (Blueprint $table) {
             $table->id();
-            $table->string('tag', 255);
-            $table->string('slug', 255)->unique();
+            $table->string('tag', 255)->unique();
             $table->timestamps();
         });
     }

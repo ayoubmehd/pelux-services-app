@@ -10,6 +10,12 @@ module.exports = {
         'page-bg': '#FBFBFB',
         dark: '#374151',
         light: '#F3F4F6'
+      },
+      outline: {
+        0: ['none !important']
+      },
+      boxShadow: {
+        0: ['none !important']
       }
     },
   },

@@ -53,6 +53,7 @@ class Service extends Model
         'lat' => 'float',
         'long' => 'float',
         'city_id' => 'integer',
+        'category_id' => 'integer',
         'provider_id' => 'integer',
         'is_publised' => 'boolean'
     ];

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ServiceRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use App\Models\Keyword;
+use App\Repositories\ServiceRepository;
+
 
 class ServiceController extends Controller
 {
@@ -39,6 +43,19 @@ class ServiceController extends Controller
         // This will need some validation
         $input = $request->all();
 
+        $inputKeywords = \collect($input['keywords'])->map(function ($keyword) {
+            return Str::slug($keyword);
+        });
+
+        $existingTags = $this->existingTags($inputKeywords->toArray());
+
+        $newTags = $this->newTags($existingTags, $inputKeywords);
+        $existingTags = \array_values(\collect($existingTags)->map(function ($existingTag) {
+            return $existingTag['id'];
+        })->toArray());
+
+        $input['existingTags'] = $existingTags;
+        $input['newTags'] = $newTags;
 
         /**
          * Todo:
@@ -97,5 +114,25 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function existingTags($inputKeywords)
+    {
+        return Keyword::whereIn('tag', $inputKeywords)->get(['id', 'tag']);
+    }
+
+    private function newTags($existingTags, $inputKeywords)
+    {
+
+        $keywords = \collect($existingTags)->map(function ($existingTag) {
+            return $existingTag['tag'];
+        })->toArray();
+
+        $newTags = $inputKeywords->filter(function ($keyword) use ($keywords) {
+            return !\in_array($keyword, $keywords);
+        });
+        return \array_values($newTags->map(function ($newTag) {
+            return ['tag' => $newTag];
+        })->toArray());
     }
 }

@@ -92,12 +92,17 @@ class ServiceRepository extends BaseRepository
 
         $model->city()->associate($input['city_id']);
 
+        $model->category()->associate($input['category']);
+
         $model->provider_id = 1; // Change this to auth()->user()->id when you implement auth
 
         $model->save();
 
-        if (isset($input['categories']))
-            $model->categories()->sync($input['categories']);
+        $newTagsIds = \collect($model->keywords()->createMany($input['newTags']))->map(function ($tag) {
+            return $tag['id'];
+        })->toArray();
+
+        $model->keywords()->sync(\array_merge($input['existingTags'], $newTagsIds));
 
         return $model;
     }
@@ -117,11 +122,9 @@ class ServiceRepository extends BaseRepository
 
         $model = $query->findOrFail($id);
 
-        $model->fill(\collect($input)->except(['categories'])->toArray());
+        $model->fill($input);
 
-
-        if (isset($input['categories']))
-            $model->categories()->sync($input['categories']);
+        $model->sync($input['tags']);
 
         $model->push();
 

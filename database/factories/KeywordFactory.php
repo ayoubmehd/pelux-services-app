@@ -22,12 +22,10 @@ class KeywordFactory extends Factory
      */
     public function definition()
     {
-        $tag = $this->faker->paragraph(2);
-        $slug = Str::slug($tag);
+        $tag = $this->faker->asciify('********************');
 
         return [
             'tag' => $tag,
-            'slug' => $slug
         ];
     }
 }

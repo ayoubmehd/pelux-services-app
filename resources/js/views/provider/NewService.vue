@@ -20,8 +20,9 @@ export default {
             form: {
                 title: "",
                 content: "",
-                categories: [],
-                city: null
+                category: -1,
+                city: null,
+                keywords: []
             }
         };
     },

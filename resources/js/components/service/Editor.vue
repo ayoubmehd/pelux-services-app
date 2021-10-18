@@ -48,13 +48,11 @@
                             Categories
                         </label>
                         <t-rich-select
-                            multiple
-                            :close-on-select="false"
                             :options="categories"
                             value-attribute="id"
                             text-attribute="name"
                             placeholder="Select multiple categories"
-                            v-model="form.categories"
+                            v-model="form.category"
                             id="categories"
                         ></t-rich-select>
                     </div>
@@ -64,7 +62,7 @@
                         - build a search functionality
                             Resource : https://www.vue-tailwind.com/docs/rich-select/#label-slot
                          -->
-                    <div>
+                    <div class="pb-3">
                         <label for="city" class="px-1 pb-1.5">
                             City
                         </label>
@@ -77,6 +75,9 @@
                             id="city"
                         ></t-rich-select>
                     </div>
+                    <div>
+                        <keywords v-model="form.keywords"></keywords>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,10 +87,12 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { mapState } from "vuex";
+import Keywords from "../Keywords.vue";
 
 export default {
     components: {
-        VueEditor
+        VueEditor,
+        Keywords
     },
     props: {
         form: {
@@ -98,8 +101,9 @@ export default {
                 return {
                     title: "",
                     content: "",
-                    categories: [2, 3],
-                    city: 1
+                    category: 2,
+                    city: 1,
+                    keywords: []
                 };
             }
         }

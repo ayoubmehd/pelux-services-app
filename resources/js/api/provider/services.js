@@ -1,11 +1,12 @@
-export async function saveService({ title, content, categories, city }) {
+export async function saveService({ title, content, category, city, keywords }) {
 
     try {
         const response = await axios.post('/api/provider/services', {
             title,
             description: content,
-            categories,
-            city_id: city
+            category,
+            city_id: city,
+            keywords
         });
 
         return [response.data, null];
