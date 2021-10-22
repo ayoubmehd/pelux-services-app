@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use Illuminate\Auth\Access\Response;
 use App\Models\Keyword;
+use App\Models\Service;
 use App\Repositories\ServiceRepository;
+use Illuminate\Support\Facades\Auth;
 
 
 class ServiceController extends Controller
@@ -39,7 +42,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-
+        if (!Auth::user()->can("create", [Service::class])) {
+            return \response()->json(
+                [
+                    "message" => "You need a provider account to create a service"
+                ],
+                402
+            );
+        }
         // This will need some validation
         $input = $request->all();
 
@@ -91,6 +101,7 @@ class ServiceController extends Controller
     {
         $service = $this->serviceRepository->find($id);
 
+
         if (empty($service)) {
             return \response()->json([
                 'error' => 'Service not found'
@@ -98,6 +109,12 @@ class ServiceController extends Controller
         }
 
         $service = $this->serviceRepository->update($request->all(), $id);
+
+        if (!$service) {
+            return \response()->json([
+                'message' => 'Can\'t perform this Action'
+            ]);
+        }
 
         return \response()->json([
             'message' => 'Service updated successfully',
@@ -113,7 +130,16 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $service = $this->serviceRepository->delete($id);
+
+        if ($service) return \response()->json([
+            "message" => "Service deleted"
+        ]);
+
+        return \response()->json([
+            "message" => "Not Found"
+        ], 404);
     }
 
     private function existingTags($inputKeywords)

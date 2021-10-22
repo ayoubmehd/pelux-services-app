@@ -87,4 +87,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Service::class, 'provider_id');
     }
+
+    public function is($role)
+    {
+        return $this->role === $role;
+    }
+
+    public function isAdmin()
+    {
+        return $this->is('admin');
+    }
+
+    public function isProvider()
+    {
+        return $this->is('provider');
+    }
+
+    public function isUser()
+    {
+        return $this->is('user');
+    }
 }
