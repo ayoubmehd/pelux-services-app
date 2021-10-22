@@ -18,7 +18,7 @@
 
         <input
             @input="textChanged"
-            class="border-0 shadow-0 block"
+            class="border-0 shadow-0 block max-w-full"
             type="text"
             placeholder="tag Comma(,) separeted"
         />

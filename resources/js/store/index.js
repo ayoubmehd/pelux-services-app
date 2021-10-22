@@ -6,6 +6,7 @@ import categories from "./modules/categories";
 import services from "./modules/provider/services.js";
 import orders from "./modules/provider/orders.js";
 import userServices from "./modules/services.js";
+import auth from "./modules/auth.js";
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     },
     strict: debug,
     modules: {
+        auth,
         cities,
         categories,
         services,
