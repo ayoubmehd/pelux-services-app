@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use Illuminate\Auth\Access\Response;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 
 abstract class BaseRepository
 {
@@ -88,7 +89,7 @@ abstract class BaseRepository
         $query = $this->model->newQuery();
 
         if (count($search)) {
-            foreach($search as $key => $value) {
+            foreach ($search as $key => $value) {
                 if (in_array($key, $this->getFieldsSearchable())) {
                     $query->where($key, $value);
                 }
@@ -132,11 +133,13 @@ abstract class BaseRepository
      */
     public function create($input)
     {
-        $model = $this->model->newInstance($input);
+        if (Auth::user()->can("create", $this->model)) {
+            $model = $this->model->newInstance($input);
+            $model->save();
 
-        $model->save();
-
-        return $model;
+            return $model;
+        }
+        return Response::deny("You need a provider account to create a service");
     }
 
     /**
@@ -149,9 +152,14 @@ abstract class BaseRepository
      */
     public function find($id, $columns = ['*'])
     {
-        $query = $this->model->newQuery();
 
-        return $query->find($id, $columns);
+        $query = $this->model->newQuery();
+        $model = $query->find($id, $columns);
+        if (Auth::user()->can("view", $model)) {
+            return $model;
+        }
+
+        return false;
     }
 
     /**
@@ -164,15 +172,21 @@ abstract class BaseRepository
      */
     public function update($input, $id)
     {
+
         $query = $this->model->newQuery();
 
         $model = $query->findOrFail($id);
 
-        $model->fill($input);
+        if (Auth::user()->can("update", $model)) {
 
-        $model->save();
+            $model->fill($input);
 
-        return $model;
+            $model->save();
+
+            return $model;
+        }
+
+        return false;
     }
 
     /**
@@ -188,6 +202,10 @@ abstract class BaseRepository
 
         $model = $query->findOrFail($id);
 
-        return $model->delete();
+        if (Auth::user()->can("delete", $model)) {
+            return $model->delete();
+        }
+
+        return false;
     }
 }

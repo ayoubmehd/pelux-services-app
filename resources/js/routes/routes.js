@@ -50,7 +50,22 @@ const routes = [
             }
         ]
     },
-
+    {
+        path: "/auth/login",
+        name: "Login",
+        component: () => import("../views/Auth/Login.vue"),
+        meta: {
+            layout: "Empty",
+        },
+    },
+    {
+        path: "/auth/register",
+        name: "Register",
+        component: () => import("../views/Auth/Register.vue"),
+        meta: {
+            layout: "Empty",
+        },
+    }
 ];
 
 export default routes;

@@ -14,8 +14,8 @@ class CreateKeywordServiceTable extends Migration
     public function up()
     {
         Schema::create('keyword_service', function (Blueprint $table) {
-            $table->foreignId('service_id')->constrained();
-            $table->foreignId('keyword_id')->constrained();
+            $table->foreignId('service_id')->constrained()->onDelete("cascade")->onUpdate("cascade");
+            $table->foreignId('keyword_id')->constrained()->onDelete("cascade")->onUpdate("cascade");;
             $table->primary(['service_id', 'keyword_id']);
             $table->timestamps();
         });

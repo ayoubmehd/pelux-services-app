@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Service;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Str;
 
 /**
@@ -73,7 +75,12 @@ class ServiceRepository extends BaseRepository
     {
         $query = $this->model->newQuery();
 
-        return $query->with($with)->withCount($withCount)->find($id, $columns);
+        $data = $query->with($with)->withCount($withCount)->find($id, $columns);
+
+        if (Auth::user()->can("view", $data)) {
+            return $data;
+        }
+        return false;
     }
 
     /**
@@ -94,7 +101,7 @@ class ServiceRepository extends BaseRepository
 
         $model->category()->associate($input['category']);
 
-        $model->provider_id = 1; // Change this to auth()->user()->id when you implement auth
+        $model->provider_id = auth()->user()->id; // Change this to auth()->user()->id when you implement auth
 
         $model->save();
 
@@ -122,12 +129,16 @@ class ServiceRepository extends BaseRepository
 
         $model = $query->findOrFail($id);
 
-        $model->fill($input);
+        if (Auth::user()->can("update", $model)) {
+            $model->fill($input);
 
-        $model->sync($input['tags']);
+            $model->sync($input['tags']);
 
-        $model->push();
+            $model->push();
 
-        return $model;
+            return $model;
+        }
+
+        return false;
     }
 }
