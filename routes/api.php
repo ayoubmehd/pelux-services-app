@@ -18,9 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('provider')->middleware(["auth:sanctum"])->group(function () {
-    Route::apiResource('services', App\Http\Controllers\Provider\ServiceController::class);
-    Route::apiResource('orders', App\Http\Controllers\Provider\OrderController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('provider')->middleware(["auth:sanctum"])->group(function () {
+        Route::apiResource('services', App\Http\Controllers\Provider\ServiceController::class);
+        Route::apiResource('orders', App\Http\Controllers\Provider\OrderController::class);
+    });
 });
 
 Route::apiResource('categories', App\Http\Controllers\CategoryController::class)

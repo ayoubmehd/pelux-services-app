@@ -77,10 +77,7 @@ class ServiceRepository extends BaseRepository
 
         $data = $query->with($with)->withCount($withCount)->find($id, $columns);
 
-        if (Auth::user()->can("view", $data)) {
-            return $data;
-        }
-        return false;
+        return $data;
     }
 
     /**

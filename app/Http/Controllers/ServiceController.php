@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ServiceRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -47,7 +48,8 @@ class ServiceController extends Controller
             'lat',
             'long',
             'city_id',
-            'provider_id'
+            'provider_id',
+            'is_publised'
         ];
 
         $with = [
@@ -66,7 +68,28 @@ class ServiceController extends Controller
             $withCount
         );
 
-        return \response()->json($service);
+        if ($service->is_publised) {
+            return \response()->json($service);
+        }
+
+        // if (!$service->is_publised && Auth::user()->isUser()) {
+        //     return \response()->json(
+        //         [
+        //             'message' => "Not Fond"
+        //         ],
+        //         404
+        //     );
+        // }
+
+        if (Auth::check() && Auth::user()->can("view", $service)) {
+            return \response()->json($service);
+        }
+        return \response()->json(
+            [
+                'message' => "Not Fond"
+            ],
+            404
+        );
     }
 
     /**
