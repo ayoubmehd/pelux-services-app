@@ -8,8 +8,11 @@ use Illuminate\Support\Str;
 
 use Illuminate\Auth\Access\Response;
 use App\Models\Keyword;
+use App\Models\Order;
 use App\Models\Service;
 use App\Repositories\ServiceRepository;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -77,6 +80,19 @@ class ServiceController extends Controller
         $service = $this->serviceRepository->create($input);
 
         return \response()->json($service);
+    }
+
+    /**
+     * Display orders of the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function orders($id)
+    {
+        $orders = Order::with("user:id,name,created_at")->where('service_id', $id)->cursorPaginate(6);
+
+        return \response()->json($orders);
     }
 
     /**

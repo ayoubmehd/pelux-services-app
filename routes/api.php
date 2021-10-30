@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('provider')->middleware(["auth:sanctum"])->group(function () {
         Route::apiResource('services', App\Http\Controllers\Provider\ServiceController::class);
+        Route::get("services/{service}/orders", [App\Http\Controllers\Provider\ServiceController::class, 'orders']);
         Route::apiResource('orders', App\Http\Controllers\Provider\OrderController::class);
     });
 });

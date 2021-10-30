@@ -8,3 +8,13 @@ export async function getOrder(id) {
         return [null, error];
     }
 }
+
+export async function getServiceOrders(serviceId, search) {
+    try {
+        const response = await axios.get(`/api/provider/services/${serviceId}/orders${search}`);
+
+        return [response.data, null];
+    } catch (error) {
+        return [null, error];
+    }
+}

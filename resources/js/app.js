@@ -35,6 +35,18 @@ import "../sass/app.scss";
  */
 Vue.use(VueRouter);
 
+Vue.filter("formatDate", function (value) {
+    if (value) {
+        return new Date(value).toLocaleDateString("fr")
+    }
+});
+Vue.filter("capetalize", function (value) {
+    if (value) {
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+});
+
 const app = new Vue({
     el: '#app',
     router,

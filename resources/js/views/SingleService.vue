@@ -39,12 +39,13 @@
                                 </t-button>
                             </li>
                             <li>
-                                <!-- <router-link
-                                    tag="t-button"
-                                    :to="{ name: 'Reviews' }"
+                                <t-button
+                                    tag="router-link"
+                                    :to="{ name: 'Orders' }"
+                                    variant="link"
                                 >
-                                    Reviews
-                                </router-link> -->
+                                    Orders
+                                </t-button>
                             </li>
                         </ul>
                     </nav>
