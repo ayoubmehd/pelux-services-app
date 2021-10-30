@@ -14,6 +14,17 @@ router.beforeEach(async (to, from, next) => {
 
     const { role } = res;
 
+    if (to.meta.noLoggedInUser) {
+        if (res.statusCode === 200) {
+            next('/');
+            return;
+        }
+        if (!error) {
+            next('/');
+            return;
+        }
+    }
+
     if (to.meta.provider) {
         if (role === 'user') {
             next({ name: "Home" });

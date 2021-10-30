@@ -69,6 +69,7 @@ const routes = [
         component: () => import("../views/Auth/Login.vue"),
         meta: {
             layout: "Empty",
+            noLoggedInUser: true
         },
     },
     {
@@ -77,6 +78,7 @@ const routes = [
         component: () => import("../views/Auth/Register.vue"),
         meta: {
             layout: "Empty",
+            noLoggedInUser: true
         },
     }
 ];
