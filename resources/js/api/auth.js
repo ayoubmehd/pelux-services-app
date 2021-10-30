@@ -30,3 +30,12 @@ export const Register = async (form) => {
         return [null, error];
     }
 }
+
+export async function getLoggedInUser() {
+    try {
+        const res = await axios.get("/api/user");
+        return [res, null];
+    } catch (error) {
+        return [null, error];
+    }
+}

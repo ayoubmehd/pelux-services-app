@@ -1,3 +1,4 @@
+import { getLoggedInUser } from "../api/auth.js";
 import VueRouter from "vue-router";
 import routes from "./routes.js";
 
@@ -9,19 +10,28 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-    // if (to.meta.login) {
-    //     const [response, error] = await checkIfUserLoggedIn();
+    const [res, error] = await getLoggedInUser();
 
-    //     if (error) {
-    //         next({ name: "Login" });
-    //         return;
-    //     }
+    const { role } = res;
 
-    //     if (response.statusCode >= 300) {
-    //         next({ name: "Login" });
-    //         return;
-    //     }
-    // }
+    if (to.meta.provider) {
+        if (role === 'user') {
+            next({ name: "Home" });
+            return;
+        }
+    }
+
+    if (to.meta.login) {
+        if (error) {
+            next({ name: "Login" });
+            return;
+        }
+
+        if (res.statusCode >= 300) {
+            next({ name: "Login" });
+            return;
+        }
+    }
 
     next();
 });

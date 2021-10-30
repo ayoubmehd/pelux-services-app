@@ -25,6 +25,10 @@ const routes = [
         path: "/services/new",
         name: "NewService",
         component: NewService,
+        meta: {
+            login: true,
+            provider: true
+        },
     },
     {
         path: "/services/:id",
@@ -53,7 +57,11 @@ const routes = [
                 name: "OrderDescription",
                 component: Description,
             },
-        ]
+        ],
+        meta: {
+            login: true,
+            provider: true
+        },
     },
     {
         path: "/auth/login",
